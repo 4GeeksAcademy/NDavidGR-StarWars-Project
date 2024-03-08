@@ -1,4 +1,6 @@
 const getState = ({ getStore, getActions, setStore }) => {
+	let backendUrl = "https://www.swapi.tech/api"
+	
 	return {
 	  store: {
 		  people: [
@@ -51,70 +53,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 			
 	  },
 	  actions: {
-		// Use getActions to call a function within a fuction
-		exampleFunction: () => {
-		  getActions().changeColor(0, "green");
+		getPeople: () => {
+			fetch(backendUrl + "/people?page=1&limit=100")
+			.then(response => response.json())
+			.then(data => setStore({people: data.results}))   
 		},
-		loadPeopleData: (url) => {
-		  fetch(url)
-			.then((res) => res.json())
-			.then((data) => {
-			  let siguiente_url = data.next;
-  
-			  if (siguiente_url != null) {
-				getActions().loadPeopleData(siguiente_url);
-			  }
-  
-			  setStore({ people: [...getStore().people, ...data.results] });
-			});
+
+		getPlanets: () => {
+			fetch(backendUrl + "/planets?page=1&limit=100")
+			.then(response => response.json())
+			.then(data => setStore({planets: data.results}))   
 		},
-  
-		loadPlanetsData: (url) => {
-		  fetch(url)
-			.then((res) => res.json())
-			.then((data) => {
-			  let siguiente_url = data.next;
-  
-			  if (siguiente_url != null) {
-				getActions().loadPlanetsData(siguiente_url);
-			  }
-  
-			  setStore({ planets: [...getStore().planets, ...data.results] });
-			});
-		},
-  
-		loadVehiclesData: (url) => {
-		  fetch(url)
-			.then((res) => res.json())
-			.then((data) => {
-			  let siguiente_url = data.next;
-  
-			  if (siguiente_url != null) {
-				getActions().loadVehiclesData(siguiente_url);
-			  }
-  
-			  setStore({ starships: [...getStore().vehicles, ...data.results] });
-			});
-		},
-		loadSomeData: () => {
-		  getActions().loadPeopleData("https://swapi.dev/api/people/");
-		  getActions().loadPlanetsData("https://swapi.dev/api/planets/");
-		  getActions().loadVehiclesData("https://swapi.dev/api/starships/");
-		},
-		changeColor: (index, color) => {
-		  //get the store
-		  const store = getStore();
-  
-		  //we have to loop the entire demo array to look for the respective index
-		  //and change its color
-		  const demo = store.demo.map((elm, i) => {
-			if (i === index) elm.background = color;
-			return elm;
-		  });
-  
-		  //reset the global store
-		  setStore({ demo: demo });
-		},
+
+		getStarships: () => {
+			fetch(backendUrl + "/starships?page=1&limit=100")
+			.then(response => response.json())
+			.then(data => setStore({starships: data.results}))   
+		}
+		
 	  },
 	};
   };

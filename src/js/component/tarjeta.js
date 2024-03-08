@@ -26,25 +26,7 @@ export const Tarjeta = ({item, categoria} ) => {
                     <img src="..." className="card-img-top" alt="..." />
                     <div className="card-body">
                         <h5 className="card-title">{item.name} </h5>
-                        <p className="card-text">
-                            {
-                            categoria == "personas" ? "Género: " + item.gender : 
-                            categoria == "planetas" ? "Población: " + item.population:
-                            "Fabricamente: " + item.manufacturer
-                            }
-                            </p>
-                        <p className="card-text">
-                            {
-                            categoria == "personas" ? "Color de Cabello: " + item.hair_color : 
-                            categoria == "planetas" ? "Gravedad: " + item.gravity:
-                            "Capacidad de Pasajeros: " + item.passengers
-                            }
-                        </p>
-                        <p className="card-text">{
-                            categoria == "personas" ? "Color de Ojos: " + item.eye_color : 
-                            categoria == "planetas" ? "Terreno: " + item.terrain:
-                            "tripulación: " + item.crew
-                            }</p>
+                        
                         <Link to={"/detalles/"+categoria+"/" + item.name} className="btn btn-primary">more info</Link>
                         <a href="#" className="btn btn-danger ms-5"> ♥ </a>
                     </div>
