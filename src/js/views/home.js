@@ -1,7 +1,4 @@
 import React, { useContext,  } from "react";
-import { Navbar } from "../component/navbar";
-import { Planeta } from "../component/tarjetaPlanetas";
-import { Vehiculos } from "../component/tarjetaVehiculos";
 import { Tarjeta } from "../component/tarjeta";
 import { Context } from "../store/appContext";
 
@@ -17,7 +14,13 @@ export const Home = () => {
 
 	return <div>		
 		<div className="d-flex overflow-scroll">
-			{store.people.map(persona => <Tarjeta item = { persona } category = 'personas' />)}
+			{store.people.map(persona => <Tarjeta item = { persona } categoria = 'personas' />)}
+		</div>
+		<div className="d-flex overflow-scroll">
+			{store.planets.map(planeta => <Tarjeta item = { planeta } categoria = 'planetas' />)}
+		</div>
+		<div className="d-flex overflow-scroll">
+			{store.starships.map(nave => <Tarjeta item = { nave } categoria = 'naves' />)}
 		</div>
 		
 		
