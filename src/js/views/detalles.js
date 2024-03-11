@@ -4,10 +4,18 @@ import { Context } from "../store/appContext";
 
 export const Detalles = props => {
 	const { store, actions } = useContext(Context);
+	const [itemInfo, setItemInfo] = useState()
 	const params = useParams();
-	let personaje = store.people.find(item => item.name == params.nombre) 
-	let planeta = store.planets.find(item => item.name == params.nombre)
-	let starship = store.starships.find(item => item.name == params.nombre)
+	let item = store[params.categoria].find((x)=>x.name == params.nombre)
+	
+	useEffect(()=>{
+		fetch(item.url)
+		.then(resp=>resp.json())
+		.then(data=>setItemInfo(data.result.properties))
+		.catch(error=>console.log(error))
+	},[])
+
+
 
 	return (
 		<div className="jumbotron">
@@ -18,7 +26,7 @@ export const Detalles = props => {
 						<img src="..."  />
 					</div>
 					<div>
-						<h1>{personaje?.name || planeta?.name || starship?.name}</h1>
+						<h1>{item.name}</h1>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tristique sollicitudin nibh sit amet commodo. Sit amet cursus sit amet. Egestas egestas fringilla phasellus faucibus. Tristique senectus et netus et malesuada fames ac turpis. Diam in arcu cursus euismod quis. Duis ultricies lacus sed turpis tincidunt id aliquet risus. Pulvinar pellentesque habitant morbi tristique senectus et netus et malesuada. Odio morbi quis commodo odio aenean sed adipiscing. Nunc sed augue lacus viverra vitae.</p>
 					</div>
 					
@@ -26,8 +34,8 @@ export const Detalles = props => {
 
 				<div className="d-flex border-top border-danger border-1" >
 					<div className="border-end border-danger border-1">
-						<h5>Property Name</h5>
-						<p>Property</p>
+						<h5>{itemInfo?.hair_color?"Hair Color:":itemInfo?.population? "Population:":itemInfo?.manufacturer?"Manufacturer:":"Item information loading"}</h5>
+						<p>{itemInfo?.hair_color||itemInfo?.population||itemInfo?.manufacturer}</p>
 
 					</div>
 					<div className="border-end border-danger border-1">

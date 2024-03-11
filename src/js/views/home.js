@@ -14,13 +14,13 @@ export const Home = () => {
 
 	return <div>		
 		<div className="d-flex overflow-scroll">
-			{store.people.map(persona => <Tarjeta item = { persona } categoria = 'personas' />)}
+			{store.people.map(persona => <Tarjeta item = { persona } categoria = 'people' />)}
 		</div>
 		<div className="d-flex overflow-scroll">
-			{store.planets.map(planeta => <Tarjeta item = { planeta } categoria = 'planetas' />)}
+			{store.planets.map(planeta => <Tarjeta item = { planeta } categoria = 'planets' />)}
 		</div>
 		<div className="d-flex overflow-scroll">
-			{store.starships.map(nave => <Tarjeta item = { nave } categoria = 'naves' />)}
+			{store.starships.map(nave => <Tarjeta item = { nave } categoria = 'starships' />)}
 		</div>
 		
 		
